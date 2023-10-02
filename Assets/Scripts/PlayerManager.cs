@@ -15,9 +15,11 @@ public class PlayerManager : MonoBehaviour
 
     public Vector2 MyVelocity;
 
-    public Vector2 Acellerometer;
+    public Vector3 Acellerometer;
 
-    public Vector2 Mouse;
+    public bool ClickDown;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -33,10 +35,12 @@ public class PlayerManager : MonoBehaviour
         
         AirbornCheck();
 
+        ClickDownMan();
+
         AcellerometerControlls();
 
         Acellerometer = Input.acceleration;
-        Mouse = Input.mousePosition;
+        
 
     }
 
@@ -50,9 +54,14 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+void ClickDownMan(){
+    if(ClickDown){
+BonusSpeed += (Time.deltaTime * 0.1f);
+    }
+}
     void EditorControls()
     {
-if(Input.GetKey(KeyCode.Space)){
+if(Input.GetKeyDown(KeyCode.Space)){
             JumpPress();
         }
      if(Input.GetKeyUp(KeyCode.Space)){
@@ -61,19 +70,22 @@ if(Input.GetKey(KeyCode.Space)){
     }
 
     public void JumpPress(){
-        BonusSpeed += (Time.deltaTime * 0.1f);
+        ClickDown = true;
+        
     }
 
     public void JumpRelease(){
+        ClickDown = false;
         myrigid.AddForce(Vector2.up * (Speed * (1 + BonusSpeed)), ForceMode2D.Impulse);
         BonusSpeed = 0;
     }
 
     void AcellerometerControlls(){
         if(isAirborne){
-            Vector2 AcelNormalised = new Vector2(Acellerometer.x,0);
+            const float AccelMultiplyer = 8;
+            Vector2 AcelNormalised = new Vector2(Acellerometer.x * (Time.deltaTime * AccelMultiplyer),0);
 
-            myrigid.AddForce(AcelNormalised * 8,ForceMode2D.Impulse);
+            myrigid.AddForce(AcelNormalised,ForceMode2D.Impulse);
             
         }
     }
