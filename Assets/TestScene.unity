@@ -1712,7 +1712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpButton: {fileID: 15944022}
   CompletedLevelPannel: {fileID: 753351369}
-  GameOverpannel: {fileID: 0}
+  GameOverpannel: {fileID: 238020173}
   LivesText: {fileID: 700997776}
 --- !u!1 &610473893
 GameObject:
