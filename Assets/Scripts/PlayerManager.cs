@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    public int Lives;
     public float Speed;
+    public int MaxJumps;
 
-    public float BonusSpeed;
+    float BonusSpeed;
 
     public bool isAirborne;
 
@@ -17,13 +19,21 @@ public class PlayerManager : MonoBehaviour
 
     public Vector3 Acellerometer;
 
-    public bool ClickDown;
+    bool ClickDown;
 
     
+
+    bool isGrounded;
+
+    int jumpsremaining;
+
     // Start is called before the first frame update
     void Start()
     {
         myrigid = this.gameObject.GetComponent<Rigidbody2D>();
+        
+
+        
     }
 
     // Update is called once per frame
@@ -41,6 +51,9 @@ public class PlayerManager : MonoBehaviour
 
         Acellerometer = Input.acceleration;
         
+        if(isGrounded && myrigid.velocity == Vector2.zero){
+            ResetJumpCount();
+        }
 
     }
 
@@ -74,9 +87,21 @@ if(Input.GetKeyDown(KeyCode.Space)){
         
     }
 
+   public bool canJump(){
+        if(jumpsremaining > 0){
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public void JumpRelease(){
         ClickDown = false;
         myrigid.AddForce(Vector2.up * (Speed * (1 + BonusSpeed)), ForceMode2D.Impulse);
+        isGrounded = false;
+        jumpsremaining -=1;
         BonusSpeed = 0;
     }
 
@@ -88,5 +113,59 @@ if(Input.GetKeyDown(KeyCode.Space)){
             myrigid.AddForce(AcelNormalised,ForceMode2D.Impulse);
             
         }
+    }
+
+public void TakeDamage(){
+    myrigid.velocity = Vector2.zero;//kill movement
+    Lives -= 1;
+    InvokeInvincabilityFrames();
+}
+
+void ResetJumpCount(){  
+    jumpsremaining = MaxJumps;
+        
+    
+}
+
+
+
+void InvokeInvincabilityFrames(){
+
+}
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+    if(col.gameObject.tag == "Enemy"){
+        Debug.Log("Enemy Hit");
+        Enemy enemy = col.gameObject.GetComponent<Enemy>();
+        if(enemy==null){
+            Debug.LogErrorFormat("NO ENEMY SCRIPT ON THIS ENEMY. ABORTING.");
+            return;
+        }
+    if(enemy.OnCollisionDamage){
+        TakeDamage();
+    }
+
+    
+
+}
+
+if(col.gameObject.tag=="Floor"){
+        //ResetJumpCount();
+    }
+
+    
+
+
+    }
+
+    void OnCollisionStay2D(Collision2D col){
+        if(col.gameObject.tag=="Floor"){
+        isGrounded = true;
+    }
+    }
+
+    void OnCollisionExit2D(Collision2D col){
+        isGrounded = false;
     }
 }

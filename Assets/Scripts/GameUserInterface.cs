@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class GameUserInterface : MonoBehaviour
 {
     public Button JumpButton;
     public GameObject CompletedLevelPannel;
+    public TextMeshProUGUI LivesText;
 
     GameManager gameManager;
     PlayerManager player;
@@ -22,7 +24,16 @@ public class GameUserInterface : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateLives();
+        UpdateJumpButton();
+    }
+    
+    void UpdateJumpButton(){
+        JumpButton.interactable = player.canJump();
+    }
+
+    void UpdateLives(){
+        LivesText.text = player.Lives.ToString();
     }
 
     public void OpenCompletedLevelScreen(){
