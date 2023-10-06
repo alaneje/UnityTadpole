@@ -7,6 +7,7 @@ public class GameUserInterface : MonoBehaviour
 {
     public Button JumpButton;
     public GameObject CompletedLevelPannel;
+    public GameObject GameOverpannel;
     public TextMeshProUGUI LivesText;
 
     GameManager gameManager;
@@ -40,6 +41,9 @@ public class GameUserInterface : MonoBehaviour
         CompletedLevelPannel.SetActive(true);
     }
 
+    public void OpenGameOverscreen(){
+        GameOverpannel.SetActive(true);
+    }
 
 
 //Buttons
