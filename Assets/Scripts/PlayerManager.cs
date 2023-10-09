@@ -159,6 +159,11 @@ if(col.gameObject.tag=="Floor"){
 
     }
 
+    public void ToungeClick(Vector2 Origin){
+        float Test = Vector2.Distance(this.transform.position, Origin);
+        Debug.Log("Distance between objects: " + Test);
+    }
+
     void OnCollisionStay2D(Collision2D col){
         if(col.gameObject.tag=="Floor"){
         isGrounded = true;

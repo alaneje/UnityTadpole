@@ -21,4 +21,9 @@ public class Enemy : MonoBehaviour
     {
         
     }
+
+    void OnMouseDown(){
+        PlayerManager player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
+        player.ToungeClick(this.transform.position);
+    }
 }
