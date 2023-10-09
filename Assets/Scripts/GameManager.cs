@@ -6,6 +6,10 @@ public class GameManager : MonoBehaviour
 {
     public enum GameState{Null, PreGame, InGame, GameFinished}
     public GameState gameState;
+
+    public int CurrentCheckpoint;
+
+    public Transform[] CheckPoints;
     public bool GamePaused;
 
     GameUserInterface UI;
