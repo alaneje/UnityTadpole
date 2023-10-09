@@ -9,6 +9,7 @@ TagManager:
   - UserInterface
   - Wall
   - Floor
+  - Tounge
   layers:
   - Default
   - TransparentFX

@@ -9,15 +9,17 @@ public class PlayerManager : MonoBehaviour
     public float Speed;
     public int MaxJumps;
 
+    public GameObject Tounge;
+
     float BonusSpeed;
 
     public bool isAirborne;
 
     Rigidbody2D myrigid;
 
-    public Vector2 MyVelocity;
+    Vector2 MyVelocity;
 
-    public Vector3 Acellerometer;
+    Vector3 Acellerometer;
 
     bool ClickDown;
 
@@ -26,6 +28,10 @@ public class PlayerManager : MonoBehaviour
     bool isGrounded;
 
     int jumpsremaining;
+
+    Vector2 ToungeAim;
+
+    float Toungelerp;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +55,8 @@ public class PlayerManager : MonoBehaviour
 
         AcellerometerControlls();
 
+        ToungeManager();
+
         Acellerometer = Input.acceleration;
         
         if(isGrounded && myrigid.velocity == Vector2.zero){
@@ -65,6 +73,20 @@ public class PlayerManager : MonoBehaviour
         else{
             isAirborne = false;
         }
+    }
+
+    void ToungeManager(){
+        if(ToungeAim != Vector2.zero){
+            Tounge.transform.position = Vector2.Lerp(this.transform.position, ToungeAim, Toungelerp);
+            Toungelerp += Time.deltaTime;
+            Vector3 SoftVector = new Vector3(ToungeAim.x, ToungeAim.y, this.transform.position.z);
+            if(Tounge.transform.position == SoftVector){
+                Tounge.transform.position = this.transform.position;
+                ToungeAim = Vector2.zero;
+                Toungelerp = 0;
+            }
+        }
+
     }
 
 void ClickDownMan(){
@@ -162,6 +184,10 @@ if(col.gameObject.tag=="Floor"){
     public void ToungeClick(Vector2 Origin){
         float Test = Vector2.Distance(this.transform.position, Origin);
         Debug.Log("Distance between objects: " + Test);
+        if(Test < 6){
+            ToungeAim = Origin;
+        }   
+        
     }
 
     void OnCollisionStay2D(Collision2D col){
