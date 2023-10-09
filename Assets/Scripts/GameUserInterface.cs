@@ -52,10 +52,16 @@ public void ReturnToMenu(bool Save){
 
 }
     public void JumpPress(){
-        player.JumpPress();
+        if(JumpButton.interactable){
+            player.JumpPress();
+        }
+        
     }
 
     public void JumpRelease(){
-        player.JumpRelease();
+        if(JumpButton.interactable){
+            player.JumpRelease();
+        }
+        
     }
 }
