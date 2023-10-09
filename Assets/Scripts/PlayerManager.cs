@@ -9,11 +9,13 @@ public class PlayerManager : MonoBehaviour
     public float Speed;
     public int MaxJumps;
 
+    public int ToungeBaseDamage;
+
     public GameObject Tounge;
 
     float BonusSpeed;
 
-    public bool isAirborne;
+    bool isAirborne;
 
     Rigidbody2D myrigid;
 
@@ -63,6 +65,10 @@ public class PlayerManager : MonoBehaviour
             ResetJumpCount();
         }
 
+    }
+
+    public int ReturnToungeDamage(Enemy.EnemyType type){
+        return ToungeBaseDamage;
     }
 
     void AirbornCheck(){

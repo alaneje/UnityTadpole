@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void KillEnemy(Enemy.EnemyType enemy, string eName){
+
+    }
+
     public void SetUI(GameUserInterface gameUserInterface){
         UI = gameUserInterface;
     }

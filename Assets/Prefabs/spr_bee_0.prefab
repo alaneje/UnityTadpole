@@ -116,6 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6a01e35de736466eabafc169bcf91b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: {x: 10, y: 10}
+  enemyType: 0
   OnCollisionDamage: 1
 --- !u!50 &1303753984175258169
 Rigidbody2D:
