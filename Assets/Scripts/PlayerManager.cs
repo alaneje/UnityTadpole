@@ -84,7 +84,7 @@ public class PlayerManager : MonoBehaviour
     void ToungeManager(){
         if(ToungeAim != Vector2.zero){
             Tounge.transform.position = Vector2.Lerp(this.transform.position, ToungeAim, Toungelerp);
-            Toungelerp += Time.deltaTime;
+            Toungelerp += (Time.deltaTime * 2);
             Vector3 SoftVector = new Vector3(ToungeAim.x, ToungeAim.y, this.transform.position.z);
             if(Tounge.transform.position == SoftVector){
                 Tounge.transform.position = this.transform.position;
