@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class WallBounceMovement : MonoBehaviour
 {
-    
+    public bool FlipOnDirection;
+    public bool StartsAimingRight;
+
+    public float Speed;
     Enemy myEnemy;
     Rigidbody2D rigidbody2D;
+
+    SpriteRenderer myspriterenderer;
 
     Vector2 MovementVec;
 
@@ -15,6 +20,7 @@ public class WallBounceMovement : MonoBehaviour
     {
         myEnemy = this.gameObject.GetComponent<Enemy>();
         rigidbody2D = myEnemy.GetRigid();
+        myspriterenderer = this.gameObject.GetComponent<SpriteRenderer>();
 
         MovementVec = Vector2.right;
         
@@ -25,13 +31,45 @@ public class WallBounceMovement : MonoBehaviour
     {
         
 
-        rigidbody2D.velocity = MovementVec;
+        rigidbody2D.velocity = (MovementVec * Speed);
 
         if(ResetTime > 0){
             ResetTime -= Time.deltaTime;
         }
 
+        SpriteUpdate();
+
         
+    }
+
+    void SpriteUpdate(){
+
+        if(FlipOnDirection){
+
+            if(StartsAimingRight){
+                if(MovementVec == Vector2.right)
+                {
+                    myspriterenderer.flipX = false;
+                }
+                if(MovementVec == Vector2.left)
+                {
+                    myspriterenderer.flipX = true;
+                }
+            }
+            else{
+                if(MovementVec == Vector2.right)
+                {
+                    myspriterenderer.flipX = true;
+                }
+                if(MovementVec == Vector2.left)
+                {
+                    myspriterenderer.flipX = false;
+                }
+
+            }
+
+
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col)

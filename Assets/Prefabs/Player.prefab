@@ -99,7 +99,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.000000029802322, y: 0.0000019073486}
   serializedVersion: 2
-  m_Radius: 0.59
+  m_Radius: 1.1
 --- !u!1 &6219959189248164762
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,4 +242,3 @@ MonoBehaviour:
   MaxJumps: 1
   ToungeBaseDamage: 10
   Tounge: {fileID: 1011853648}
-  isAirborne: 0
