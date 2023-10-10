@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public enum GameState{Null, PreGame, InGame, GameFinished}
     public GameState gameState;
 
+    public int StartLives;
+
     public int CurrentCheckpoint;
 
     public Transform[] CheckPoints;

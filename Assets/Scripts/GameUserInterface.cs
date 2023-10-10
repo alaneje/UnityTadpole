@@ -51,6 +51,11 @@ public class GameUserInterface : MonoBehaviour
 public void ReturnToMenu(bool Save){
 
 }
+
+public void RespawnInGame(){
+    player.Respawn(false);//respawn the player at the last checkpoint
+    GameOverpannel.SetActive(false);
+}
     public void JumpPress(){
         if(JumpButton.interactable){
             player.JumpPress();

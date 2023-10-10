@@ -40,7 +40,7 @@ public class PlayerManager : MonoBehaviour
     {
         myrigid = this.gameObject.GetComponent<Rigidbody2D>();
         
-
+        Respawn(true);
         
     }
 
@@ -69,6 +69,17 @@ public class PlayerManager : MonoBehaviour
 
     public int ReturnToungeDamage(Enemy.EnemyType type){
         return ToungeBaseDamage;
+    }
+
+    public void Respawn(bool StartOfLevel){
+        GameManager GM = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        Lives = 3;//need to change
+        int Checkp = 0;
+        if(!StartOfLevel){
+            Checkp = GM.CurrentCheckpoint;
+        }
+        
+        this.transform.position = GM.CheckPoints[Checkp].position;
     }
 
     void AirbornCheck(){
