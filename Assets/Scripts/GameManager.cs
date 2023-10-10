@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public int StartLives;
 
+    public float JumpMax;
+
     public int CurrentCheckpoint;
 
     public Transform[] CheckPoints;

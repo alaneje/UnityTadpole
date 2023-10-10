@@ -10,6 +10,8 @@ public class GameUserInterface : MonoBehaviour
     public GameObject GameOverpannel;
     public TextMeshProUGUI LivesText;
 
+    public Image JumpBar;
+
     GameManager gameManager;
     PlayerManager player;
     // Start is called before the first frame update
@@ -27,6 +29,12 @@ public class GameUserInterface : MonoBehaviour
     {
         UpdateLives();
         UpdateJumpButton();
+        UpdateJumpBar();
+    }
+
+    void UpdateJumpBar(){
+        JumpBar.fillAmount = ReturnStatasOne(player.GetJumpBonus(),gameManager.JumpMax);
+
     }
     
     void UpdateJumpButton(){
@@ -68,5 +76,14 @@ public void RespawnInGame(){
             player.JumpRelease();
         }
         
+    }
+
+    float ReturnStatasOne(float Current, float Max)
+    {
+        float C = Current;
+        float M = Max;
+
+        float T = C / M;
+        return T;
     }
 }

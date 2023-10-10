@@ -1444,6 +1444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameState: 0
   StartLives: 3
+  JumpMax: 1
   CurrentCheckpoint: 0
   CheckPoints:
   - {fileID: 1572694816}

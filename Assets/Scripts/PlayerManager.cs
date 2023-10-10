@@ -35,10 +35,13 @@ public class PlayerManager : MonoBehaviour
 
     float Toungelerp;
 
+    GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
         myrigid = this.gameObject.GetComponent<Rigidbody2D>();
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         
         Respawn(true);
         
@@ -114,7 +117,10 @@ public class PlayerManager : MonoBehaviour
 
 void ClickDownMan(){
     if(ClickDown){
-BonusSpeed += (Time.deltaTime * 0.1f);
+        if(BonusSpeed < gameManager.JumpMax){
+            BonusSpeed += (Time.deltaTime * 0.1f);
+        }
+
     }
 }
     void EditorControls()
@@ -221,5 +227,9 @@ if(col.gameObject.tag=="Floor"){
 
     void OnCollisionExit2D(Collision2D col){
         isGrounded = false;
+    }
+
+    public float GetJumpBonus(){
+        return BonusSpeed;
     }
 }
