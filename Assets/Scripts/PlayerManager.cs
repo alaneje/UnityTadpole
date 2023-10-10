@@ -96,12 +96,18 @@ public class PlayerManager : MonoBehaviour
         if(ToungeAim != Vector2.zero){
             Tounge.transform.position = Vector2.Lerp(this.transform.position, ToungeAim, Toungelerp);
             Toungelerp += (Time.deltaTime * 2);
+            Tounge.GetComponent<CircleCollider2D>().enabled = true;
             Vector3 SoftVector = new Vector3(ToungeAim.x, ToungeAim.y, this.transform.position.z);
             if(Tounge.transform.position == SoftVector){
                 Tounge.transform.position = this.transform.position;
                 ToungeAim = Vector2.zero;
                 Toungelerp = 0;
             }
+
+            
+        }
+        else{
+            Tounge.GetComponent<CircleCollider2D>().enabled = false;
         }
 
     }
