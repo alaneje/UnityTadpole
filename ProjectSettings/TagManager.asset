@@ -10,6 +10,7 @@ TagManager:
   - Wall
   - Floor
   - Tounge
+  - Ooze
   layers:
   - Default
   - TransparentFX

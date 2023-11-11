@@ -208,6 +208,10 @@ if(col.gameObject.tag=="Floor"){
     
 
 
+    }//end of col
+
+    void OnTriggerEnter2D(Collider2D col){
+        Debug.Log(col.tag);
     }
 
     public void ToungeClick(Vector2 Origin){
