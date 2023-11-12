@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,8 @@ public class PlayerManager : MonoBehaviour
     
 
     bool isGrounded;
+
+    bool Stuck;
 
     int jumpsremaining;
 
@@ -150,7 +153,13 @@ if(Input.GetKeyDown(KeyCode.Space)){
 
     public void JumpRelease(){
         ClickDown = false;
-        myrigid.AddForce(Vector2.up * (Speed * (1 + BonusSpeed)), ForceMode2D.Impulse);
+        if(Stuck){
+            myrigid.AddForce(Vector2.up * Speed, ForceMode2D.Impulse);
+        }
+        else{
+            myrigid.AddForce(Vector2.up * (Speed * (1 + BonusSpeed)), ForceMode2D.Impulse);
+        }
+        
         isGrounded = false;
         jumpsremaining -=1;
         BonusSpeed = 0;
@@ -212,6 +221,18 @@ if(col.gameObject.tag=="Floor"){
 
     void OnTriggerEnter2D(Collider2D col){
         Debug.Log(col.tag);
+    }
+
+    void OnTriggerStay2D(Collider2D col){
+        if(col.tag=="Ooze"){
+            Stuck = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col){
+        if(col.tag == "Ooze"){
+            Stuck = false;
+        }
     }
 
     public void ToungeClick(Vector2 Origin){
