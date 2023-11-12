@@ -11,6 +11,7 @@ TagManager:
   - Floor
   - Tounge
   - Ooze
+  - Hazard
   layers:
   - Default
   - TransparentFX
