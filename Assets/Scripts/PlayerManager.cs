@@ -7,6 +7,8 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public int Lives;
+
+    public int Points;
     public float Speed;
     public int MaxJumps;
 
@@ -221,6 +223,11 @@ if(col.gameObject.tag=="Floor"){
 
     void OnTriggerEnter2D(Collider2D col){
         Debug.Log(col.tag);
+
+        if(col.tag == "Collectable"){
+            Points++;
+            Destroy(col.gameObject);
+        }
     }
 
     void OnTriggerStay2D(Collider2D col){

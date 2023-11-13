@@ -12,6 +12,7 @@ TagManager:
   - Tounge
   - Ooze
   - Hazard
+  - Collectable
   layers:
   - Default
   - TransparentFX
