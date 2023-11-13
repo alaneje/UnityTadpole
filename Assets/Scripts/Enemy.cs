@@ -44,6 +44,8 @@ public class Enemy : MonoBehaviour
         if(Health.x < 1){
            GameManager gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
            gameManager.KillEnemy(enemyType, EnemyName);
+           PlayerManager player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
+           player.Points+=5;
            Destroy(this.gameObject);
 
         }
