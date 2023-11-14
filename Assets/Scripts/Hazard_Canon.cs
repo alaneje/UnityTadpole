@@ -10,6 +10,8 @@ public class Hazard_Canon : MonoBehaviour
 
     public float StartDelay;
 
+    public Vector2Int DirectionOfBall;
+
     float Timer;
     // Start is called before the first frame update
     void Start()
@@ -27,7 +29,8 @@ public class Hazard_Canon : MonoBehaviour
         else{
             Timer -= Time.deltaTime;
             if(Timer < 0){
-                Instantiate(Ball, this.transform.position, Quaternion.identity);
+             SimpleHazard canonball = Instantiate(Ball.GetComponent<SimpleHazard>(), this.transform.position, Quaternion.identity);
+             canonball.Direction = DirectionOfBall;
                 Timer = FireFrequency;
             }
         }
