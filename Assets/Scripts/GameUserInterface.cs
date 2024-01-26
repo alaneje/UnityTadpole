@@ -10,6 +10,8 @@ public class GameUserInterface : MonoBehaviour
     public GameObject GameOverpannel;
     public TextMeshProUGUI LivesText;
 
+    public TextMeshProUGUI ScoreText;
+
     public Image JumpBar;
 
     GameManager gameManager;
@@ -30,6 +32,11 @@ public class GameUserInterface : MonoBehaviour
         UpdateLives();
         UpdateJumpButton();
         UpdateJumpBar();
+        UpdateScore();
+    }
+
+    void UpdateScore(){
+        ScoreText.text = player.Points.ToString();
     }
 
     void UpdateJumpBar(){
