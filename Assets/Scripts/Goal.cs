@@ -21,7 +21,10 @@ public class Goal : MonoBehaviour
      void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.tag=="Player"){
+            if(col.gameObject.GetComponent<PlayerManager>().Lives > 0){
                 gameManager.FinishLevel();
+            }
+                
         }
        // Debug.Log("Trigger is: " + col.gameObject.tag);
         
