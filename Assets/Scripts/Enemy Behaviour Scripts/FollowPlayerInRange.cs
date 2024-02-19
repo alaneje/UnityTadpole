@@ -5,6 +5,8 @@ using UnityEngine;
 public class FollowPlayerInRange : MonoBehaviour
 {
     public PlayerManager player;
+
+    public bool TurnOffWhenColliderIsOff;
     public float AcceptedRange;
     public float Speed;
     
@@ -18,7 +20,11 @@ public class FollowPlayerInRange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PlayerInRange()){
+        bool CanAct = true;
+        if(TurnOffWhenColliderIsOff){
+            if(this.gameObject.GetComponent<Collider2D>().enabled == false){CanAct = false;}
+        }
+        if(PlayerInRange() && CanAct){
             Debug.Log("PLAYER IN RANGE.");
             this.gameObject.transform.position =  Vector3.MoveTowards(this.gameObject.transform.position , player.transform.position, Time.deltaTime * Speed);
         }
