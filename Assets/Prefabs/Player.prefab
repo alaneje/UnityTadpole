@@ -326,5 +326,6 @@ MonoBehaviour:
   Points: 0
   Speed: 10
   MaxJumps: 1
+  MySpriteRenderer: {fileID: 6219959189248164756}
   ToungeBaseDamage: 10
   Tounge: {fileID: 1011853648}

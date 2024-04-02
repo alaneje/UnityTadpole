@@ -73,7 +73,7 @@ public class WallBounceMovement : MonoBehaviour
         
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+/*    void OnCollisionEnter2D(Collision2D col)
     {
         Debug.Log("OnCollisionEnter2D");
         if(col.gameObject.tag == "Wall" && ResetTime < 1){
@@ -89,4 +89,23 @@ public class WallBounceMovement : MonoBehaviour
             }
         }
     }
+    */
+
+    void OnTriggerEnter2D(Collider2D col){
+
+         Debug.Log("OnCollisionEnter2D");
+        if(col.gameObject.tag == "Wall" && ResetTime < 1){
+            if(MovementVec == Vector2.right){
+                MovementVec = Vector2.left;
+                Debug.Log("Moving Left");
+                return;
+            }
+            if(MovementVec == Vector2.left){
+                MovementVec = Vector2.right;
+                Debug.Log("Moving Right");
+                return;
+            }
+        }
+    }
+
 }

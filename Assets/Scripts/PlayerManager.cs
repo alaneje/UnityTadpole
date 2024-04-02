@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 
@@ -11,6 +12,8 @@ public class PlayerManager : MonoBehaviour
     public int Points;
     public float Speed;
     public int MaxJumps;
+
+    public SpriteRenderer MySpriteRenderer;
 
     public int ToungeBaseDamage;
 
@@ -39,6 +42,17 @@ public class PlayerManager : MonoBehaviour
     Vector2 ToungeAim;
 
     float Toungelerp;
+
+    float InvicyFrameTime;
+
+    float InvincyFrameLerper;
+
+    bool InvincyTimeDirection = true;
+
+    bool InvincyTime;
+    
+    float InvincyFrameLerpSpeed = 2;
+   
 
     GameManager gameManager;
 
@@ -73,6 +87,42 @@ public class PlayerManager : MonoBehaviour
             ResetJumpCount();
         }
 
+       
+        InvincyTimer();
+        InvincyTimeAnimation();
+    }
+
+    void InvincyTimer(){
+        if(InvincyTime){
+            InvicyFrameTime -= Time.deltaTime;
+        }
+        if(InvicyFrameTime < 0){
+            InvicyFrameTime = 0;
+            InvincyTime=false;
+        }
+    }
+
+    public void SetInvinceabilityFrames(float Timer){
+        InvicyFrameTime = Timer;
+        InvincyTime = true;
+    }
+
+    void InvincyTimeAnimation(){
+        if(InvincyTime){
+            
+            if(InvincyTimeDirection){
+                InvincyFrameLerper += (Time.deltaTime * InvincyFrameLerpSpeed);
+            }
+            else{
+                InvincyFrameLerper -= (Time.deltaTime * InvincyFrameLerpSpeed);
+            }
+
+            if(InvincyFrameLerper > 1){InvincyTimeDirection = false;}
+            if(InvincyFrameLerper < 0){InvincyTimeDirection = true;}
+            
+            
+            MySpriteRenderer.color = Color.Lerp(Color.white,Color.red,InvincyFrameLerper);
+        }
     }
 
     public int ReturnToungeDamage(Enemy.EnemyType type){
@@ -178,21 +228,20 @@ if(Input.GetKeyDown(KeyCode.Space)){
     }
 
 public void TakeDamage(){
+    if(!InvincyTime){
     myrigid.velocity = Vector2.zero;//kill movement
     Lives -= 1;
-    InvokeInvincabilityFrames();
+
+    SetInvinceabilityFrames(2);
+    
+    }
+    
 }
 
 void ResetJumpCount(){  
     jumpsremaining = MaxJumps;
         
     
-}
-
-
-
-void InvokeInvincabilityFrames(){
-
 }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -228,6 +277,18 @@ if(col.gameObject.tag=="Floor"){
             Points++;
             Destroy(col.gameObject);
         }
+
+        if(col.gameObject.tag == "Enemy"){
+        Debug.Log("Enemy Hit");
+        Enemy enemy = col.gameObject.GetComponent<Enemy>();
+        if(enemy==null){
+            Debug.LogErrorFormat("NO ENEMY SCRIPT ON THIS ENEMY. ABORTING.");
+            return;
+        }
+    if(enemy.OnCollisionDamage){
+        TakeDamage();
+    }
+    }
     }
 
     void OnTriggerStay2D(Collider2D col){
