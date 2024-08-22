@@ -9,12 +9,13 @@ public class CameraManager : MonoBehaviour
     public Transform PlayerTransform;
 
     public Vector3 MinPos;
+    public Vector3 CameraOffset = new Vector3(0,-5,0);
     // Start is called before the first frame update
     void Start()
     {
         PlayerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
-        MinPos = this.gameObject.transform.position;
+        MinPos = gameObject.transform.position + CameraOffset;
         
     }
 
@@ -26,13 +27,11 @@ public class CameraManager : MonoBehaviour
 
     void FixedUpdate(){
         if(PlayerTransform.position.y < MinPos.y){
-            this.gameObject.transform.position = MinPos;
-
+            gameObject.transform.position = MinPos;
         }
         else{
-            Vector3 NewPos;
-            NewPos = new Vector3(this.transform.position.x, PlayerTransform.position.y, this.transform.position.z);
-            this.transform.position = NewPos;
+            Vector3 NewPos = new Vector3(transform.position.x, PlayerTransform.position.y, transform.position.z);
+            transform.position = NewPos;
         }
     }
 }
