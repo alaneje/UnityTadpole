@@ -6,8 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/DebugMenu.unity
+    guid: c59418d8dc5004f43ab5446b7bf91a61
+  - enabled: 1
     path: Assets/TestScene.unity
     guid: 5cf7562af41674301a8d1935e14ccf32
+  - enabled: 1
+    path: Assets/Level2.unity
+    guid: be23ae9c89aab40dc8f86305f4478fc4
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 021b1e76f2ac34a66ad61b61b89808d0, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 3c5f66b6020334180bc8a31db1101d33, type: 2}
